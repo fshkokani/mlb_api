@@ -37,7 +37,7 @@ public class PlayerServiceImpl implements PlayerService{
 
 //       //You can repurpose using a previously defined method (DRY)
 
-        playerToUpdate.setName(playerToUpdate.getName() ==null || playerToUpdate.getName().isEmpty() ?  playerToUpdate.getName() :playerToUpdate.getName());
+        playerToUpdate.setName(playerToUpdate.getName() ==null || playerToUpdate.getName().isEmpty() ?  playerToUpdate.getName() :playerDTO.getName());
 
         //another way
 
@@ -46,15 +46,15 @@ public class PlayerServiceImpl implements PlayerService{
         } else if(playerToUpdate.getAge()<18) {
             playerToUpdate.setAge(playerToUpdate.getAge());
         } else {
-            playerToUpdate.setAge(playerToUpdate.getAge());
+            playerToUpdate.setAge(playerDTO.getAge());
         }
 
 
         if (playerToUpdate.getRating() != null) {
-            playerToUpdate.setRating(playerToUpdate.getRating());
+            playerToUpdate.setRating(playerDTO.getRating());
         }
         if (playerToUpdate.getYearsOfExperience() != null){
-            playerToUpdate.setYearsOfExperience(playerToUpdate.getYearsOfExperience());
+            playerToUpdate.setYearsOfExperience(playerDTO.getYearsOfExperience());
         }
 
         return this.playerRepository.save(playerToUpdate);
