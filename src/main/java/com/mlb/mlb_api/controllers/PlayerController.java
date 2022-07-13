@@ -50,41 +50,10 @@ public class PlayerController {
 //        return this.playerService.saveAll(playerDTOS);
 //    }
 //
-//    @PutMapping("/update") // the extra path is not needed here, it can differentiate with the @Getmapping
-//    public Player updatePlayer(@RequestBody Player player){
-//        Integer encomingId = player.getId();
-//        Optional<Player> playerToUpdateOptional = this.playerRepository.findById(encomingId); //question if false what returns
-//        if (playerToUpdateOptional.isEmpty()) {
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No player found with id " + player.getId());
-//        }
-//        Player playerToUpdate = playerToUpdateOptional.get();
-//
-//
-////        //using a previously defined method (DRY)
-//         // getPlayerById(player.getId());
-//
-//        playerToUpdate.setName(player.getName() ==null || player.getName().isEmpty() ?  playerToUpdate.getName() :player.getName());
-//
-//        //another way
-//
-//        if(player.getAge() == null){
-//            playerToUpdate.setAge(playerToUpdate.getAge());
-//        } else if(player.getAge()<18) {
-//            playerToUpdate.setAge(playerToUpdate.getAge());
-//        } else {
-//            playerToUpdate.setAge(player.getAge());
-//        }
-//
-//
-//        if (player.getRating() != null) {
-//            playerToUpdate.setRating(player.getRating());
-//        }
-//        if (player.getYearsOfExperience() != null){
-//            playerToUpdate.setYearsOfExperience(player.getYearsOfExperience());
-//        }
-//
-//        return this.playerRepository.save(playerToUpdate);
-//    }
+    @PutMapping("/update") // the extra path is not needed here, it can differentiate with the @Getmapping
+    public Player updatePlayer(@RequestBody PlayerDTO playerDTO, @RequestParam Integer id){
+        return this.playerService.update(playerDTO, id);
+    }
 //    @DeleteMapping("/{id}")
 //    public void removePlayer(@PathVariable Integer id){
 //        // can repuropose getplayerbyid
