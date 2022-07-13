@@ -32,32 +32,32 @@ public class PlayerServiceImpl implements PlayerService{
         if (playerToUpdateOptional.isEmpty()) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No player found with id " + encomingId);
         }
-        Player playerToUpdate = playerToUpdateOptional.get();
+        Player playerFromDb = playerToUpdateOptional.get();
 
 
 //       //You can repurpose using a previously defined method (DRY)
 
-        playerToUpdate.setName(playerToUpdate.getName() ==null || playerToUpdate.getName().isEmpty() ?  playerToUpdate.getName() :playerDTO.getName());
+        playerFromDb.setName(playerDTO.getName() ==null || playerDTO.getName().isEmpty() ?  playerFromDb.getName() :playerDTO.getName());
 
         //another way
 
-        if(playerToUpdate.getAge() == null){
-            playerToUpdate.setAge(playerToUpdate.getAge());
-        } else if(playerToUpdate.getAge()<18) {
-            playerToUpdate.setAge(playerToUpdate.getAge());
+        if(playerDTO.getAge() == null){
+            playerFromDb.setAge(playerFromDb.getAge());
+        } else if(playerDTO.getAge()<18) {
+            playerFromDb.setAge(playerFromDb.getAge());
         } else {
-            playerToUpdate.setAge(playerDTO.getAge());
+            playerFromDb.setAge(playerDTO.getAge());
         }
 
 
-        if (playerToUpdate.getRating() != null) {
-            playerToUpdate.setRating(playerDTO.getRating());
+        if (playerDTO.getRating() != null) {
+            playerFromDb.setRating(playerDTO.getRating());
         }
-        if (playerToUpdate.getYearsOfExperience() != null){
-            playerToUpdate.setYearsOfExperience(playerDTO.getYearsOfExperience());
+        if (playerDTO.getYearsOfExperience() != null){
+            playerFromDb.setYearsOfExperience(playerDTO.getYearsOfExperience());
         }
 
-        return this.playerRepository.save(playerToUpdate);
+        return this.playerRepository.save(playerFromDb);
     }
 
 
