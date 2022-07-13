@@ -50,8 +50,8 @@ public class PlayerController {
 //        return this.playerService.saveAll(playerDTOS);
 //    }
 //
-    @PutMapping("/update") // the extra path is not needed here, it can differentiate with the @Getmapping
-    public Player updatePlayer(@RequestBody PlayerDTO playerDTO, @RequestParam Integer id){
+    @PutMapping("/update/{id}") // the extra path is not needed here, it can differentiate with the @Getmapping
+    public Player updatePlayer(@RequestBody PlayerDTO playerDTO, @PathVariable Integer id){
         return this.playerService.update(playerDTO, id);
     }
 //    @DeleteMapping("/{id}")
