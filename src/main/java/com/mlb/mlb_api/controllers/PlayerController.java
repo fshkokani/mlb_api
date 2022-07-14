@@ -31,50 +31,34 @@ public class PlayerController {
     public Iterable getAllPlayers(){
     return this.playerService.findAll();
 }
-//@GetMapping("/ByNameAsc")
-//public Iterable getAllPlayersAscending(){
-//       return this.playerRepository.findAllByOrderByNameAsc();
-//}
-//    @GetMapping("/{id}")
-//    public Optional<Player> getPlayerById(@PathVariable("id") Integer id){// use Optional becasue findById return an optional
-//        if (this.playerRepository.findById(id) != null){
-//            return this.playerRepository.findById(id);
-//        } return null;
-//}
+    @GetMapping("/ByNameAsc")
+    public Iterable getAllPlayersAscending(){
+           return this.playerService.findAllByOrderByNameAsc();
+    }
+    @GetMapping("/{id}")
+    public Player getPlayerById(@PathVariable("id") Integer id) {// use Optional becasue findById return an optional
+        return this.playerService.findById(id);
+    }
     @PostMapping("/add")
     public Player addPlayer(@RequestBody PlayerDTO playerDTO){
         return this.playerService.save(playerDTO);
     }
-//    @PostMapping("/addMulti")
-//    public Iterable addMultiPlayers (@RequestBody Iterable<PlayerDTO> playerDTOS){
-//        return this.playerService.saveAll(playerDTOS);
-//    }
-//
+    @PostMapping("/addMulti")
+    public Iterable addMultiPlayers (@RequestBody Iterable<PlayerDTO> playerDTOS){
+        return this.playerService.saveAll(playerDTOS);
+    }
+
     @PutMapping("/update/{id}") // the extra path is not needed here, it can differentiate with the @Getmapping
     public Player updatePlayer(@RequestBody PlayerDTO playerDTO, @PathVariable Integer id){
         return this.playerService.update(playerDTO, id);
     }
-//    @DeleteMapping("/{id}")
-//    public void removePlayer(@PathVariable Integer id){
-//        // can repuropose getplayerbyid
-//        Optional<Player> playerToDeleteOptional = this.playerRepository.findById(id); //question if false what returns
-//            if (playerToDeleteOptional.isEmpty()) {
-//                throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No player found with id ");
-//            }
-//            if(playerToDeleteOptional.isPresent()){
-//                this.playerRepository.delete(playerToDeleteOptional.get());
-//                throw new ResponseStatusException(HttpStatus.OK, "The player was successfully deleted");
-//                // or deletebyId
-//            }
-////        playerToDeleteOptional.ifPresent(playerToDeleteOptional::)
-//
-//        }
-////        throw new ResponseStatusException(HttpStatus.NOT_FOUND);}
-//    //
-//    @GetMapping("/find")
-//    public List<Player> findPlayerByName(@RequestParam String name){
-//        if(this.playerRepository.findByName(name) == null){
-//            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Player with this " +name+ " not found");
-//        } return this.playerRepository.findByName(name);
-//    }
+    @DeleteMapping("/{id}")
+    public void removePlayer(@PathVariable Integer id){
+        this.playerService.delete(id);
+    }
+
+    @GetMapping("/find")
+    public List<Player> findPlayerByName(@RequestParam String name){
+        return this.playerService.findByName(name);
+    }
 }
